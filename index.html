@@ -1,0 +1,853 @@
+<!doctype html>
+<html class="dark" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Inter:wght@400;500&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Estilos para el botón flotante de WhatsApp */
+.btn-whatsapp {
+  position: fixed;
+  bottom: 20px; /* Distancia desde abajo */
+  right: 20px;  /* Distancia desde la derecha */
+  width: 60px;
+  height: 60px;
+  background-color: #25d366; /* Color oficial de WhatsApp */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Asegura que siempre esté por encima de otros elementos */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-whatsapp img {
+  width: 35px;
+  height: 35px;
+}
+
+/* Efecto al pasar el cursor (Hover) */
+.btn-whatsapp:hover {
+  transform: scale(1.1); /* Hace que el botón crezca ligeramente */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+}
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "inverse-surface": "#dae2fd",
+              "primary-fixed-dim": "#2fd9f4",
+              secondary: "#d0bcff",
+              "primary-container": "#22d3ee",
+              "tertiary-fixed": "#ffdadb",
+              "on-secondary-fixed": "#23005c",
+              "on-surface": "#dae2fd",
+              "on-primary": "#00363e",
+              "surface-bright": "#31394d",
+              surface: "#0b1326",
+              "tertiary-fixed-dim": "#ffb2b7",
+              "secondary-fixed-dim": "#d0bcff",
+              error: "#ffb4ab",
+              "surface-container": "#171f33",
+              "primary-fixed": "#a2eeff",
+              tertiary: "#ffd2d3",
+              "on-tertiary-container": "#a0002f",
+              primary: "#8aebff",
+              "surface-container-highest": "#2d3449",
+              "on-secondary-fixed-variant": "#5516be",
+              "secondary-fixed": "#e9ddff",
+              outline: "#859397",
+              "surface-container-low": "#131b2e",
+              "on-surface-variant": "#bbc9cd",
+              "on-secondary-container": "#c4abff",
+              "on-secondary": "#3c0091",
+              "on-primary-fixed": "#001f25",
+              "surface-variant": "#2d3449",
+              "surface-container-lowest": "#060e20",
+              "tertiary-container": "#ffaaaf",
+              "on-error-container": "#ffdad6",
+              background: "#0b1326",
+              "inverse-primary": "#006877",
+              "surface-dim": "#0b1326",
+              "on-error": "#690005",
+              "secondary-container": "#571bc1",
+              "on-background": "#dae2fd",
+              "on-primary-container": "#005763",
+              "on-tertiary-fixed": "#40000d",
+              "inverse-on-surface": "#283044",
+              "on-tertiary-fixed-variant": "#92002a",
+              "surface-container-high": "#222a3d",
+              "on-tertiary": "#67001b",
+              "error-container": "#93000a",
+              "surface-tint": "#2fd9f4",
+              "outline-variant": "#3c494c",
+              "on-primary-fixed-variant": "#004e5a",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              base: "8px",
+              "margin-desktop": "64px",
+              "max-width": "1440px",
+              gutter: "24px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "headline-lg": ["Space Grotesk"],
+              "label-md": ["JetBrains Mono"],
+              "headline-md": ["Space Grotesk"],
+              "display-lg": ["Space Grotesk"],
+              "body-lg": ["Inter"],
+              "label-sm": ["JetBrains Mono"],
+              "headline-lg-mobile": ["Space Grotesk"],
+              "body-md": ["Inter"],
+            },
+            fontSize: {
+              "headline-lg": [
+                "48px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "600",
+                },
+              ],
+              "label-md": [
+                "14px",
+                {
+                  lineHeight: "1.4",
+                  letterSpacing: "0.05em",
+                  fontWeight: "500",
+                },
+              ],
+              "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "500" }],
+              "display-lg": [
+                "72px",
+                {
+                  lineHeight: "1.1",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "label-sm": ["12px", { lineHeight: "1.4", fontWeight: "500" }],
+              "headline-lg-mobile": [
+                "32px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .neon-border-cyan:hover {
+        border-color: #2fd9f4;
+        box-shadow: 0 0 15px rgba(47, 217, 244, 0.3);
+      }
+      .neon-border-violet:hover {
+        border-color: #d0bcff;
+        box-shadow: 0 0 15px rgba(208, 188, 255, 0.3);
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-surface text-on-surface selection:bg-primary-fixed-dim selection:text-on-primary"
+  >
+    <!-- TopNavBar -->
+    <nav
+      class="fixed top-0 w-full bg-surface/10 backdrop-blur-xl border-b border-outline-variant/30 shadow-[0_0_20px_rgba(47,217,244,0.1)] z-50"
+    >
+      <div
+        class="flex justify-between items-center max-w-max-width mx-auto px-4 md:px-margin-desktop h-20"
+      >
+        <div
+          class="font-headline-md text-headline-md tracking-tighter text-primary-fixed-dim"
+        >
+          SOMOSTUWEB
+        </div>
+        
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex gap-gutter items-center">
+          <a
+            class="text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1 font-body-md text-body-md"
+            href="#"
+            >Services</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md"
+            href="#"
+            >Portfolio</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md"
+            href="#"
+            >Contact</a
+          >
+          <button
+            class="ml-4 px-6 py-2 border border-primary-fixed-dim text-primary-fixed-dim hover:bg-primary-fixed-dim hover:text-on-primary transition-all duration-300 font-label-md text-label-md active:scale-95"
+          >
+            Free Audit
+          </button>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="menu-btn" class="md:hidden text-primary-fixed-dim focus:outline-none z-50">
+          <span id="menu-icon" class="material-symbols-outlined !text-3xl">menu</span>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu Container -->
+      <div 
+        id="mobile-menu" 
+        class="hidden md:hidden absolute top-20 left-0 w-full bg-surface/95 backdrop-blur-2xl border-b border-outline-variant/30 transition-all duration-300 ease-in-out"
+      >
+        <div class="flex flex-col p-6 gap-6 text-center">
+          <a
+            class="text-primary-fixed-dim font-body-md text-body-md py-2 border-b border-outline-variant/10"
+            href="#"
+            >Services</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md py-2 border-b border-outline-variant/10"
+            href="#"
+            >Portfolio</a
+          >
+          <a
+            class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md py-2 border-b border-outline-variant/10"
+            href="#"
+            >Contact</a
+          >
+          <button
+            class="mt-2 w-full px-6 py-3 border border-primary-fixed-dim text-primary-fixed-dim hover:bg-primary-fixed-dim hover:text-on-primary transition-all duration-300 font-label-md text-label-md active:scale-95"
+          >
+            Free Audit
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="pt-20">
+      <!-- Hero Section -->
+      <section
+        class="relative min-h-[921px] flex items-center overflow-hidden px-margin-mobile md:px-margin-desktop"
+      >
+        <div
+          class="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter items-center w-full"
+        >
+          <div class="z-10">
+            <div
+              class="mb-6 inline-block px-3 py-1 bg-primary/10 border border-primary-fixed-dim text-primary-fixed-dim font-label-sm text-label-sm uppercase tracking-widest"
+            >
+              Digital Agency v2.0
+            </div>
+            <h1
+              class="font-headline-lg-mobile md:font-display-lg text-headline-lg-mobile md:text-display-lg text-on-surface mb-8 leading-tight"
+            >
+              Transformamos tu visión en una
+              <span class="text-primary-fixed-dim">presencia digital</span>
+              imparable.
+            </h1>
+            <p
+              class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl"
+            >
+              Ingeniería web de alto rendimiento para marcas que no aceptan la
+              mediocridad. Elevamos tu ecosistema digital con precisión técnica.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button
+                class="px-8 py-4 bg-primary-fixed-dim text-on-primary font-label-md text-label-md hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(47,217,244,0.4)]"
+              >
+                INICIAR PROYECTO
+              </button>
+              <button
+                class="px-8 py-4 border border-outline-variant text-on-surface font-label-md text-label-md hover:bg-surface-variant active:scale-95 transition-all"
+              >
+                VER PORTAFOLIO
+              </button>
+            </div>
+          </div>
+          <div class="relative hidden md:block">
+            <div
+              class="absolute -inset-10 bg-primary-fixed-dim/10 blur-[100px] rounded-full"
+            ></div>
+            <div
+              class="glass-card aspect-square rounded-xl p-8 relative overflow-hidden border-primary-fixed-dim/20"
+            >
+              <img
+                alt="Digital Tech Hero"
+                class="w-full h-full object-cover opacity-60 mix-blend-screen"
+                data-alt="A high-tech digital interface displaying complex data visualizations, server architectures, and glowing holographic elements in a dark, obsidian-toned environment. The scene is illuminated by vibrant neon cyan and electric violet light streaks that evoke a sense of high-speed data transfer and futuristic computing. The mood is sophisticated, technical, and intensely focused on digital excellence."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8GSc1vCAuomfcmR8NcpOZhX_plGsKTV8-QLGVDRjLlmKb4KKCPc0l1BBj2rJFvbJc87UDgGuqSadhO-n6krLcJ1kcZGPKuRUOmBDiB2dgh9A8iYT2dTvUVspQzmjSQFMY0Dy8RQjXP2QvlwGnLpZ-onAhaN5FN81n5Yb-r3NBksiyh046ebDq1qF8PK_woBxtu5HgQp4sbETUUV4pW4YlrQfmZYuDCinQNl2Ix4cxlUnG0z7OTHWI2xMpf11ledfpi12kI2TWgoI"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Stats Row -->
+      <section
+        class="py-20 bg-surface-container-lowest border-y border-outline-variant/20"
+      >
+        <div
+          class="max-w-max-width mx-auto px-margin-desktop grid grid-cols-2 md:grid-cols-4 gap-gutter text-center"
+        >
+          <div>
+            <div
+              class="font-display-lg text-primary-fixed-dim text-4xl md:text-5xl mb-2"
+            >
+              100+
+            </div>
+            <div
+              class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+            >
+              Proyectos
+            </div>
+          </div>
+          <div>
+            <div
+              class="font-display-lg text-primary-fixed-dim text-4xl md:text-5xl mb-2"
+            >
+              5+
+            </div>
+            <div
+              class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+            >
+              Años
+            </div>
+          </div>
+          <div>
+            <div
+              class="font-display-lg text-primary-fixed-dim text-4xl md:text-5xl mb-2"
+            >
+              24/7
+            </div>
+            <div
+              class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+            >
+              Soporte
+            </div>
+          </div>
+          <div>
+            <div
+              class="font-display-lg text-primary-fixed-dim text-4xl md:text-5xl mb-2"
+            >
+              15
+            </div>
+            <div
+              class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest"
+            >
+              Especialistas
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section class="py-32 px-margin-mobile md:px-margin-desktop">
+        <div class="max-w-max-width mx-auto">
+          <div
+            class="flex flex-col md:flex-row justify-between items-end mb-20"
+          >
+            <div class="max-w-2xl">
+              <h2 class="font-headline-lg text-headline-lg mb-6">
+                Servicios
+                <span class="text-primary-fixed-dim">Especializados</span>
+              </h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant">
+                Soluciones técnicas diseñadas para dominar el mercado digital
+                actual.
+              </p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+            <!-- Service 1 -->
+            <div
+              class="glass-card p-10 group hover:bg-surface-container transition-all duration-500 neon-border-cyan"
+            >
+              <div
+                class="mb-8 w-16 h-16 bg-primary-fixed-dim/10 flex items-center justify-center text-primary-fixed-dim group-hover:scale-110 transition-transform"
+              >
+                <span
+                  class="material-symbols-outlined !text-4xl"
+                  data-icon="code"
+                  >code</span
+                >
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-4 text-on-surface"
+              >
+                Web Design &amp; Architecture
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                Desarrollo de ecosistemas web escalables, ultrarrápidos y
+                optimizados para conversión, utilizando las últimas pilas
+                tecnológicas.
+              </p>
+              <ul class="space-y-3 mb-8">
+                <li
+                  class="flex items-center gap-3 text-on-surface-variant font-label-sm text-label-sm"
+                >
+                  <span
+                    class="material-symbols-outlined text-primary-fixed-dim !text-sm"
+                    >terminal</span
+                  >
+                  React &amp; Next.js Frameworks
+                </li>
+                <li
+                  class="flex items-center gap-3 text-on-surface-variant font-label-sm text-label-sm"
+                >
+                  <span
+                    class="material-symbols-outlined text-primary-fixed-dim !text-sm"
+                    >terminal</span
+                  >
+                  Headless CMS Integration
+                </li>
+              </ul>
+            </div>
+            <!-- Service 2 -->
+            <div
+              class="glass-card p-10 group hover:bg-surface-container transition-all duration-500 neon-border-violet"
+            >
+              <div
+                class="mb-8 w-16 h-16 bg-secondary/10 flex items-center justify-center text-secondary group-hover:scale-110 transition-transform"
+              >
+                <span
+                  class="material-symbols-outlined !text-4xl"
+                  data-icon="rocket_launch"
+                  >rocket_launch</span
+                >
+              </div>
+              <h3
+                class="font-headline-md text-headline-md mb-4 text-on-surface"
+              >
+                Digital Marketing Intelligence
+              </h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-8">
+                Estrategias de crecimiento basadas en datos que maximizan el ROI
+                a través de precisión técnica en SEO y pauta digital.
+              </p>
+              <ul class="space-y-3 mb-8">
+                <li
+                  class="flex items-center gap-3 text-on-surface-variant font-label-sm text-label-sm"
+                >
+                  <span
+                    class="material-symbols-outlined text-secondary !text-sm"
+                    >analytics</span
+                  >
+                  Performance SEO
+                </li>
+                <li
+                  class="flex items-center gap-3 text-on-surface-variant font-label-sm text-label-sm"
+                >
+                  <span
+                    class="material-symbols-outlined text-secondary !text-sm"
+                    >analytics</span
+                  >
+                  Data Analytics Dashboards
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects Gallery -->
+      <section
+        class="py-32 bg-surface-container-low px-margin-mobile md:px-margin-desktop overflow-hidden"
+      >
+        <div class="max-w-max-width mx-auto">
+          <h2 class="font-headline-lg text-headline-lg mb-20 text-center">
+            Proyectos <span class="text-primary-fixed-dim">Recientes</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+            <!-- Project 1 -->
+            <div class="relative group aspect-[4/5] overflow-hidden">
+              <img
+                alt="Fintech Dashboard"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                data-alt="A sleek web dashboard display on a professional monitor within a dark, minimalist workspace. The UI design features dark mode aesthetics with neon blue accents and data-rich visualizations. The lighting is low-key with subtle highlights on the hardware, projecting a high-tech developer environment style."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWkSyUbNRS7vkYaFGWzFi16HB4BT9QCggMmVV4yQT-qA004j3M4wlEMhyoccUIPeUlKY4SYNINVwQqc6KkJu459Xmdp04AojoRDUt90_V7r7mARP3TK5VkrLtGeTAe_lmWe5Ybjyn07LUUpr9l_TiunbUVqEpH5rRzVxK782HSYO7j1CrI1-sZjaARyEStlSLkql_f62kDT2txpdjMMPQcfisGwAIYo_kPIMBI9ERgxBSk8f_xxYB-aRwYLrtVGs5-zwBKYlDA2ro"
+              />
+              <div
+                class="absolute inset-0 bg-surface/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 border border-primary-fixed-dim/0 group-hover:border-primary-fixed-dim/50"
+              >
+                <div
+                  class="font-label-sm text-label-sm text-primary-fixed-dim mb-2"
+                >
+                  FINTECH
+                </div>
+                <h4
+                  class="font-headline-md text-headline-md text-on-surface mb-4"
+                >
+                  Nova Capital UI
+                </h4>
+                <a
+                  class="text-primary-fixed-dim flex items-center gap-2 font-label-md text-label-md uppercase"
+                  href="#"
+                  >View Case Study
+                  <span class="material-symbols-outlined"
+                    >arrow_forward</span
+                  ></a
+                >
+              </div>
+            </div>
+            <!-- Project 2 -->
+            <div class="relative group aspect-[4/5] overflow-hidden">
+              <img
+                alt="E-commerce App"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                data-alt="Modern smartphone mockups showcasing a high-end mobile application interface. The design is minimalist with deep obsidian backgrounds and electric violet highlights. The setting is a clean, architectural studio space with soft atmospheric lighting, reflecting a premium tech agency brand."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQD5CTWW19_LkZi9TS1xtbDafuhLZX_ERbxFXdVv_3i_3VEz1l8kX3PLkJa7EfU4I4nbwh-VojR2t2zFcMylCEXe_Bfr0lWwjQGd9WYb-6YcARnjRcEXxCMve8Q-w3GIt5B8KFjouvTATUpfkDziuoDqKGoEnyhySYLIOnldiJoM0H0u2u9ub64i9qltIU4dIZg_KPp2ZBWP44okhrz5dy-Dznm9jVfl-zS9tCm3yA7UI306Dk4Sn-Ty-tjVVmU0BTyln0CcN0VO0"
+              />
+              <div
+                class="absolute inset-0 bg-surface/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 border border-secondary/0 group-hover:border-secondary/50"
+              >
+                <div class="font-label-sm text-label-sm text-secondary mb-2">
+                  RETAIL
+                </div>
+                <h4
+                  class="font-headline-md text-headline-md text-on-surface mb-4"
+                >
+                  Lumina Store
+                </h4>
+                <a
+                  class="text-secondary flex items-center gap-2 font-label-md text-label-md uppercase"
+                  href="#"
+                  >View Case Study
+                  <span class="material-symbols-outlined"
+                    >arrow_forward</span
+                  ></a
+                >
+              </div>
+            </div>
+            <!-- Project 3 -->
+            <div class="relative group aspect-[4/5] overflow-hidden">
+              <img
+                alt="Arch Project"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                data-alt="A wide-angle view of a high-performance architectural firm's website design on a large desktop monitor. The interface features bold typography and high-contrast imagery in a dark mode setting. The overall style is sophisticated, architectural, and clean, using a palette of blacks, whites, and cyan."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIc5ijVoRgYoYZ1qTzDfSn7NNpzT2BznxqSNonsp9YkMIQRmeYVWHwErm4HvjxfRh9Xe4FSYZTrEtrj730DZkdCyt-qoM4faGjX1jh_aR5H9Pbu34J-fluhuN1c-f3FioixUXelce8ricjFJ7l2u2CpwcAxDANvHv_8F4hQ_AD4aHiwquxwrLYVzSu3lDw3ZTPzingdXS2_uluyIHxb-PWm-6D9rKlUJrd2VUITRJgLd1nK-W-qSTCNcqjlTfsVoLhl5bgsvDFPLc"
+              />
+              <div
+                class="absolute inset-0 bg-surface/80 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-8 border border-primary-fixed-dim/0 group-hover:border-primary-fixed-dim/50"
+              >
+                <div
+                  class="font-label-sm text-label-sm text-primary-fixed-dim mb-2"
+                >
+                  ARCHITECTURE
+                </div>
+                <h4
+                  class="font-headline-md text-headline-md text-on-surface mb-4"
+                >
+                  Vertex Studio
+                </h4>
+                <a
+                  class="text-primary-fixed-dim flex items-center gap-2 font-label-md text-label-md uppercase"
+                  href="#"
+                  >View Case Study
+                  <span class="material-symbols-outlined"
+                    >arrow_forward</span
+                  ></a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonial -->
+      <section class="py-32 px-margin-mobile md:px-margin-desktop">
+        <div class="max-w-3xl mx-auto text-center">
+          <span
+            class="material-symbols-outlined text-primary-fixed-dim !text-6xl mb-8"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >format_quote</span
+          >
+          <p
+            class="font-headline-md text-headline-md text-on-surface mb-10 italic leading-relaxed"
+          >
+            "SOMOSTUWEB no solo construyó un sitio web; crearon una herramienta
+            de ingeniería que transformó nuestra tasa de conversión. Su enfoque
+            técnico es incomparable en la industria."
+          </p>
+          <div class="flex items-center justify-center gap-4">
+            <div
+              class="w-16 h-16 rounded-full overflow-hidden border-2 border-primary-fixed-dim"
+            >
+              <img
+                alt="Carlos Méndez"
+                data-alt="A professional portrait of a modern tech executive with a confident expression. He is photographed in a minimalist studio with soft, cool-toned lighting that emphasizes a clean and corporate look. The image aligns with a premium, professional dark mode aesthetic, featuring high contrast and professional clarity."
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZL1hw8FJGELyb5apBvj-HkTMR2r9t0SYiOgEhn-6Dvx4Hio7gQz1W5E4C5efqigJaA41euVcYzl6B8eV7iU7PQVC1pM8c24SBfqFyTufznMQnb-dfMlzdjiQnfKgtz-kSRaBe7sFXtpYAXySSDwBnB_m843BEa096UBIWXQd-P7m8ZKlmxJE5Kizf-vqchTi_PzpqSehO6ZYqptDBDe-kfUjly1FvA1CJhNvfZ-l7_i7vxF3lCkcY6YPrIejeiWHyhZpfo-FY2kE"
+              />
+            </div>
+            <div class="text-left">
+              <div class="font-body-lg font-bold text-on-surface">
+                Carlos Méndez
+              </div>
+              <div
+                class="font-label-sm text-label-sm text-on-surface-variant uppercase"
+              >
+                CEO, TechCore Solutions
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA / Form -->
+      <section
+        class="py-32 bg-surface-container-highest px-margin-mobile md:px-margin-desktop relative"
+      >
+        <div
+          class="absolute inset-0 bg-primary-fixed-dim/5 pointer-events-none"
+        ></div>
+        <div
+          class="max-w-max-width mx-auto grid grid-cols-1 md:grid-cols-2 gap-gutter items-center"
+        >
+          <div>
+            <h2 class="font-headline-lg text-headline-lg mb-6">
+              Solicitud de <span class="text-primary-fixed-dim">Auditoría</span>
+            </h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant mb-10">
+              Analizamos tu presencia digital actual y entregamos un reporte
+              técnico con oportunidades reales de crecimiento. Sin compromisos.
+            </p>
+            <div class="space-y-6">
+              <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-primary-fixed-dim"
+                  >check_circle</span
+                >
+                <span class="font-body-md text-body-md"
+                  >Análisis de rendimiento SEO</span
+                >
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-primary-fixed-dim"
+                  >check_circle</span
+                >
+                <span class="font-body-md text-body-md"
+                  >Auditoría de UX/UI</span
+                >
+              </div>
+              <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-primary-fixed-dim"
+                  >check_circle</span
+                >
+                <span class="font-body-md text-body-md"
+                  >Escalabilidad tecnológica</span
+                >
+              </div>
+            </div>
+          </div>
+          <div class="glass-card p-10">
+            <form
+              id="contact-form"
+             
+            >
+              <input type="hidden" name="_subject" value="Nueva solicitud de auditoría - SOMOSTUWEB" />
+              <input type="hidden" name="_template" value="table" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_next" value="thankyou.html" />
+              <div>
+                <label
+                  class="block font-label-md text-label-md text-on-surface-variant mb-2"
+                  for="contact-name"
+                >NOMBRE COMPLETO</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  class="w-full bg-surface border-0 border-b border-outline-variant focus:border-primary-fixed-dim focus:ring-0 text-on-surface transition-all placeholder:text-on-surface-variant/30"
+                  placeholder="Tu nombre"
+                  type="text"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block font-label-md text-label-md text-on-surface-variant mb-2"
+                  for="contact-email"
+                >EMAIL CORPORATIVO</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  class="w-full bg-surface border-0 border-b border-outline-variant focus:border-primary-fixed-dim focus:ring-0 text-on-surface transition-all placeholder:text-on-surface-variant/30"
+                  placeholder="email@empresa.com"
+                  type="email"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block font-label-md text-label-md text-on-surface-variant mb-2"
+                  for="contact-website"
+                >SITIO WEB ACTUAL</label>
+                <input
+                  id="contact-website"
+                  name="website"
+                  class="w-full bg-surface border-0 border-b border-outline-variant focus:border-primary-fixed-dim focus:ring-0 text-on-surface transition-all placeholder:text-on-surface-variant/30"
+                  placeholder="https://tuweb.com"
+                  type="url"
+                />
+              </div>
+              <div>
+                <label
+                  class="block font-label-md text-label-md text-on-surface-variant mb-2"
+                  for="contact-message"
+                >CUÉNTANOS TU PROYECTO</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows="4"
+                  class="w-full bg-surface border-0 border-b border-outline-variant focus:border-primary-fixed-dim focus:ring-0 text-on-surface transition-all placeholder:text-on-surface-variant/30 resize-none"
+                  placeholder="Describe tu necesidad o el tipo de auditoría que requieres"
+                  required
+                ></textarea>
+              </div>
+              <button
+                class="w-full py-4 bg-primary-fixed-dim text-on-primary font-label-md text-label-md hover:brightness-110 active:scale-95 transition-all shadow-[0_0_15px_rgba(47,217,244,0.3)]"
+                type="submit"
+              >
+                ENVIAR SOLICITUD
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-surface-container-lowest border-t border-outline-variant/20"
+    >
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-gutter max-w-max-width mx-auto px-margin-desktop py-20"
+      >
+        <div>
+          <div
+            class="font-headline-md text-headline-md text-primary-fixed-dim mb-6"
+          >
+            SOMOSTUWEB
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant max-w-xs">
+            Engineering digital dominance. We build high-performance tools for
+            ambitious brands.
+          </p>
+        </div>
+        <div>
+          <h5
+            class="font-label-md text-label-md text-on-surface mb-6 uppercase tracking-widest"
+          >
+            Legal &amp; Policy
+          </h5>
+          <div class="flex flex-col gap-4">
+            <a
+              class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md"
+              href="#"
+              >Privacy Policy</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md"
+              href="#"
+              >Terms of Service</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md"
+              href="#"
+              >Cookie Policy</a
+            >
+          </div>
+        </div>
+        <div>
+          <h5
+            class="font-label-md text-label-md text-on-surface mb-6 uppercase tracking-widest"
+          >
+            Connect
+          </h5>
+          <div class="flex flex-col gap-4">
+            <a
+              class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md"
+              href="#"
+              >LinkedIn</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md"
+              href="#"
+              >GitHub</a
+            >
+            <a
+              class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors font-body-md text-body-md"
+              href="#"
+              >Twitter</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="max-w-max-width mx-auto px-margin-desktop py-8 border-t border-outline-variant/10 text-center md:text-left"
+      >
+        <span class="text-on-surface-variant font-body-md text-body-md"
+          >© 2024 SOMOSTUWEB. Technical Excellence Guaranteed.</span
+        >
+      </div>
+    </footer>
+<!-- Botón flotante de WhatsApp -->
+<a href="https://wa.me/569000000000?text=Hola,%20me%20interesan%20sus%20servicios" class="btn-whatsapp" target="_blank" rel="noopener noreferrer">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Chat de WhatsApp">
+</a>
+    <!-- Interactive Mobile Menu Logic -->
+    <script>
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const menuIcon = document.getElementById('menu-icon');
+
+      menuBtn.addEventListener('click', () => {
+        // Alternar visibilidad del menú
+        mobileMenu.classList.toggle('hidden');
+        
+        // Cambiar el icono dinámicamente de "menu" a "close" (X)
+        if (mobileMenu.classList.contains('hidden')) {
+          menuIcon.textContent = 'menu';
+        } else {
+          menuIcon.textContent = 'close';
+        }
+      });
+
+      // Opcional: Cerrar menú si el usuario hace clic en un enlace de navegación
+      const mobileLinks = mobileMenu.querySelectorAll('a, button');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuIcon.textContent = 'menu';
+        });
+      });
+    </script>
+  </body>
+</html>
